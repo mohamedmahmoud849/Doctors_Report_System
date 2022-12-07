@@ -1,0 +1,21 @@
+ def database():
+            
+            patientname = name.get()
+            email = Email.get()
+            admitteddate = arr[0].get()
+            reasonforadmission = arr[1].get()
+            pasthistory = arr[2].get()
+            progress = arr[3].get()
+            currentcondition = arr[4].get()
+            prognosis = arr[5].get()
+            labresults = arr[6].get()
+            currentmedication = arr[7].get()
+            arrangements = arr[8].get()
+            conn = sqlite3.connect('Hospital.db')
+            with conn:
+                cursor = conn.cursor()
+            cursor.execute(
+                'CREATE TABLE IF NOT EXISTS Reports (PatientName TEXT,Email TEXT,When were they admitted to your hospital? TEXT,Reason for admission and medical diagnosis TEXT,Past medical history (if known) TEXT,Progress on ward TEXT,Current clinical condition TEXT,Prognosis and prospects for rehabilitation TEXT,Relevant laboratory results, x-rays etc TEXT,Current medication TEXT,Arrangements to follow up TEXT)')
+            cursor.execute('INSERT INTO Reports (PatientName,Email,When were they admitted to your hospital?,Reason for admission and medical diagnosis,Past medical history (if known),Progress on ward,Current clinical condition,Prognosis and prospects for rehabilitation,Relevant laboratory results, x-rays etc,Current medication,Arrangements to follow up ) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
+                          (patientname,email,admitteddate,reasonforadmission,pasthistory,progress,currentcondition,prognosis,labresults,currentmedication,arrangements))
+            conn.commit()
